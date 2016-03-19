@@ -36,8 +36,15 @@
               height (.-height canvas)
               img (.createImageData ctx width height)
               pixels (.-data img)]
-          (set! (.-fillStyle ctx) (rand-color))
-          (.fillRect ctx 0 0 width height)))) 1000)]
+          (dorun
+            (map
+              (fn [[x y]]
+                (set! (.-fillStyle ctx) (rand-color))
+                (.fillRect ctx x y 1 1))
+              (for [x (range width)
+                    y (range height)]
+                [x y]))))))
+    1000)]
   (swap! app-state assoc :interval interval))
 
 (defn ^:export run[]
