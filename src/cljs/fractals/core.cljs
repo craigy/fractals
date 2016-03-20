@@ -23,7 +23,21 @@
         (and (< (+ (* x x) (* y y)) (* 2 2)) (< iter max-iter))
         (recur (+ (- (* x x) (* y y)) x0) (+ (* 2 x y) y0) (inc iter))
         (let [d (- 255 (int (* iter (/ 255 max-iter))))]
-          (color-str d d d (* iter (/ 1 max-iter))))))))
+          {:r d :g d :b d :a (* iter (/ 255 max-iter))})))))
+
+(defn draw-remaining [ctx id d width height max-iter coords t]
+  (dorun
+    (map
+      (fn [[x y]]
+        (let [color (mandelbrot-color x y width height max-iter)]
+          (aset d 0 (:r color))
+          (aset d 1 (:g color))
+          (aset d 2 (:b color))
+          (aset d 3 (:a color))
+          (.putImageData ctx id x y)))
+      (take t coords)))
+  (when (= max-iter (:iterations @app-state))
+    (js/window.requestAnimationFrame #(draw-remaining ctx id d width height max-iter (drop t coords) t))))
 
 (defn draw-mandelbrot! [max-iter]
   (let [canvas (js/document.getElementById "mandelbrot")]
@@ -32,17 +46,17 @@
             width (.-width canvas)
             height (.-height canvas)
             img (.createImageData ctx width height)
-            pixels (.-data img)]
+            pixels (.-data img)
+            id (.createImageData ctx 1 1)
+            d (.-data id)]
         (set! (.-fillStyle ctx) "#FFFFFF")
         (.fillRect ctx 0 0 width height)
-        (dorun
-          (map
-            (fn [[x y]]
-              (set! (.-fillStyle ctx) (mandelbrot-color x y width height max-iter))
-              (.fillRect ctx x y 1 1))
-            (for [x (range width)
-                  y (range height)]
-              [x y])))))))
+        (draw-remaining
+          ctx id d width height max-iter
+          (for [x (range width)
+                y (range height)]
+            [x y])
+          2000)))))
 
 (draw-mandelbrot! (:iterations @app-state))
 
