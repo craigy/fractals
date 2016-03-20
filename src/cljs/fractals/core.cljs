@@ -4,7 +4,9 @@
 
 (defn color-str
   ([r g b]
-   (str "#" (.toString r 16) (.toString g 16) (.toString b 16))))
+   (str "#" (.toString r 16) (.toString g 16) (.toString b 16)))
+  ([r g b a]
+   (str "rgba(" r ", " g ", " b ", " a ")")))
 
 (defn mandelbrot-color [px py width height]
   (let [x0 (- (* 3.5 (/ px width)) 2.5)
@@ -16,8 +18,8 @@
       (if
         (and (< (+ (* x x) (* y y)) (* 2 2)) (< iter max-iter))
         (recur (+ (- (* x x) (* y y)) x0) (+ (* 2 x y) y0) (inc iter))
-        (let [d (int (* iter (/ 255 max-iter)))]
-          (color-str d d d))))))
+        (let [d (- 255 (int (* iter (/ 255 max-iter))))]
+          (color-str d d d (* iter (/ 1 max-iter))))))))
 
 (defn draw-mandelbrot! []
   (let [canvas (js/document.getElementById "mandelbrot")]
