@@ -11,8 +11,7 @@
                  [com.cemerick/piggieback   "0.2.1"     :scope "test"]
                  [weasel                    "0.7.0"     :scope "test"]
                  [org.clojure/tools.nrepl   "0.2.12"    :scope "test"]
-                 [boot/core                 "2.5.5"]
-                 [reagent                   "0.6.0-alpha"]])
+                 [boot/core                 "2.5.5"]])
 
 (require '[adzerk.boot-cljs :refer [cljs]]
          '[pandeiro.boot-http :refer [serve]]
