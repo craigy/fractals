@@ -65,9 +65,35 @@ iter = G__12761;
 continue;
 } else {
 var d = ((255) - ((iter * ((255) / max_iter)) | (0)));
-return fractals.core.color_str.cljs$core$IFn$_invoke$arity$4(d,d,d,(iter * ((1) / max_iter)));
+return new cljs.core.PersistentArrayMap(null, 4, [cljs.core.cst$kw$r,d,cljs.core.cst$kw$g,d,cljs.core.cst$kw$b,d,cljs.core.cst$kw$a,(iter * ((255) / max_iter))], null);
 }
 break;
+}
+});
+fractals.core.draw_remaining = (function fractals$core$draw_remaining(ctx,id,d,width,height,max_iter,coords,t){
+cljs.core.dorun.cljs$core$IFn$_invoke$arity$1(cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p__12781){
+var vec__12782 = p__12781;
+var x = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12782,(0),null);
+var y = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12782,(1),null);
+var color = fractals.core.mandelbrot_color(x,y,width,height,max_iter);
+(d[(0)] = cljs.core.cst$kw$r.cljs$core$IFn$_invoke$arity$1(color));
+
+(d[(1)] = cljs.core.cst$kw$g.cljs$core$IFn$_invoke$arity$1(color));
+
+(d[(2)] = cljs.core.cst$kw$b.cljs$core$IFn$_invoke$arity$1(color));
+
+(d[(3)] = cljs.core.cst$kw$a.cljs$core$IFn$_invoke$arity$1(color));
+
+return ctx.putImageData(id,x,y);
+}),cljs.core.take.cljs$core$IFn$_invoke$arity$2(t,coords)));
+
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(max_iter,cljs.core.cst$kw$iterations.cljs$core$IFn$_invoke$arity$1((cljs.core.deref.cljs$core$IFn$_invoke$arity$1 ? cljs.core.deref.cljs$core$IFn$_invoke$arity$1(fractals.core.app_state) : cljs.core.deref.call(null,fractals.core.app_state))))){
+var G__12783 = (function (){
+return fractals$core$draw_remaining(ctx,id,d,width,height,max_iter,cljs.core.drop.cljs$core$IFn$_invoke$arity$2(t,coords),t);
+});
+return window.requestAnimationFrame(G__12783);
+} else {
+return null;
 }
 });
 fractals.core.draw_mandelbrot_BANG_ = (function fractals$core$draw_mandelbrot_BANG_(max_iter){
@@ -78,50 +104,43 @@ var width = canvas.width;
 var height = canvas.height;
 var img = ctx.createImageData(width,height);
 var pixels = img.data;
+var id = ctx.createImageData((1),(1));
+var d = id.data;
 ctx.fillStyle = "#FFFFFF";
 
 ctx.fillRect((0),(0),width,height);
 
-return cljs.core.dorun.cljs$core$IFn$_invoke$arity$1(cljs.core.map.cljs$core$IFn$_invoke$arity$2(((function (ctx,width,height,img,pixels,canvas){
-return (function (p__12775){
-var vec__12776 = p__12775;
-var x = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12776,(0),null);
-var y = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12776,(1),null);
-ctx.fillStyle = fractals.core.mandelbrot_color(x,y,width,height,max_iter);
-
-return ctx.fillRect(x,y,(1),(1));
-});})(ctx,width,height,img,pixels,canvas))
-,(function (){var iter__7227__auto__ = ((function (ctx,width,height,img,pixels,canvas){
-return (function fractals$core$draw_mandelbrot_BANG__$_iter__12777(s__12778){
-return (new cljs.core.LazySeq(null,((function (ctx,width,height,img,pixels,canvas){
+return fractals.core.draw_remaining(ctx,id,d,width,height,max_iter,(function (){var iter__7227__auto__ = ((function (ctx,width,height,img,pixels,id,d,canvas){
+return (function fractals$core$draw_mandelbrot_BANG__$_iter__12795(s__12796){
+return (new cljs.core.LazySeq(null,((function (ctx,width,height,img,pixels,id,d,canvas){
 return (function (){
-var s__12778__$1 = s__12778;
+var s__12796__$1 = s__12796;
 while(true){
-var temp__4425__auto__ = cljs.core.seq(s__12778__$1);
+var temp__4425__auto__ = cljs.core.seq(s__12796__$1);
 if(temp__4425__auto__){
 var xs__4977__auto__ = temp__4425__auto__;
 var x = cljs.core.first(xs__4977__auto__);
-var iterys__7223__auto__ = ((function (s__12778__$1,x,xs__4977__auto__,temp__4425__auto__,ctx,width,height,img,pixels,canvas){
-return (function fractals$core$draw_mandelbrot_BANG__$_iter__12777_$_iter__12779(s__12780){
-return (new cljs.core.LazySeq(null,((function (s__12778__$1,x,xs__4977__auto__,temp__4425__auto__,ctx,width,height,img,pixels,canvas){
+var iterys__7223__auto__ = ((function (s__12796__$1,x,xs__4977__auto__,temp__4425__auto__,ctx,width,height,img,pixels,id,d,canvas){
+return (function fractals$core$draw_mandelbrot_BANG__$_iter__12795_$_iter__12797(s__12798){
+return (new cljs.core.LazySeq(null,((function (s__12796__$1,x,xs__4977__auto__,temp__4425__auto__,ctx,width,height,img,pixels,id,d,canvas){
 return (function (){
-var s__12780__$1 = s__12780;
+var s__12798__$1 = s__12798;
 while(true){
-var temp__4425__auto____$1 = cljs.core.seq(s__12780__$1);
+var temp__4425__auto____$1 = cljs.core.seq(s__12798__$1);
 if(temp__4425__auto____$1){
-var s__12780__$2 = temp__4425__auto____$1;
-if(cljs.core.chunked_seq_QMARK_(s__12780__$2)){
-var c__7225__auto__ = cljs.core.chunk_first(s__12780__$2);
+var s__12798__$2 = temp__4425__auto____$1;
+if(cljs.core.chunked_seq_QMARK_(s__12798__$2)){
+var c__7225__auto__ = cljs.core.chunk_first(s__12798__$2);
 var size__7226__auto__ = cljs.core.count(c__7225__auto__);
-var b__12782 = cljs.core.chunk_buffer(size__7226__auto__);
-if((function (){var i__12781 = (0);
+var b__12800 = cljs.core.chunk_buffer(size__7226__auto__);
+if((function (){var i__12799 = (0);
 while(true){
-if((i__12781 < size__7226__auto__)){
-var y = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__7225__auto__,i__12781);
-cljs.core.chunk_append(b__12782,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x,y], null));
+if((i__12799 < size__7226__auto__)){
+var y = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__7225__auto__,i__12799);
+cljs.core.chunk_append(b__12800,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x,y], null));
 
-var G__12788 = (i__12781 + (1));
-i__12781 = G__12788;
+var G__12806 = (i__12799 + (1));
+i__12799 = G__12806;
 continue;
 } else {
 return true;
@@ -129,29 +148,29 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__12782),fractals$core$draw_mandelbrot_BANG__$_iter__12777_$_iter__12779(cljs.core.chunk_rest(s__12780__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__12800),fractals$core$draw_mandelbrot_BANG__$_iter__12795_$_iter__12797(cljs.core.chunk_rest(s__12798__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__12782),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__12800),null);
 }
 } else {
-var y = cljs.core.first(s__12780__$2);
-return cljs.core.cons(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x,y], null),fractals$core$draw_mandelbrot_BANG__$_iter__12777_$_iter__12779(cljs.core.rest(s__12780__$2)));
+var y = cljs.core.first(s__12798__$2);
+return cljs.core.cons(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x,y], null),fractals$core$draw_mandelbrot_BANG__$_iter__12795_$_iter__12797(cljs.core.rest(s__12798__$2)));
 }
 } else {
 return null;
 }
 break;
 }
-});})(s__12778__$1,x,xs__4977__auto__,temp__4425__auto__,ctx,width,height,img,pixels,canvas))
+});})(s__12796__$1,x,xs__4977__auto__,temp__4425__auto__,ctx,width,height,img,pixels,id,d,canvas))
 ,null,null));
-});})(s__12778__$1,x,xs__4977__auto__,temp__4425__auto__,ctx,width,height,img,pixels,canvas))
+});})(s__12796__$1,x,xs__4977__auto__,temp__4425__auto__,ctx,width,height,img,pixels,id,d,canvas))
 ;
 var fs__7224__auto__ = cljs.core.seq(iterys__7223__auto__(cljs.core.range.cljs$core$IFn$_invoke$arity$1(height)));
 if(fs__7224__auto__){
-return cljs.core.concat.cljs$core$IFn$_invoke$arity$2(fs__7224__auto__,fractals$core$draw_mandelbrot_BANG__$_iter__12777(cljs.core.rest(s__12778__$1)));
+return cljs.core.concat.cljs$core$IFn$_invoke$arity$2(fs__7224__auto__,fractals$core$draw_mandelbrot_BANG__$_iter__12795(cljs.core.rest(s__12796__$1)));
 } else {
-var G__12789 = cljs.core.rest(s__12778__$1);
-s__12778__$1 = G__12789;
+var G__12807 = cljs.core.rest(s__12796__$1);
+s__12796__$1 = G__12807;
 continue;
 }
 } else {
@@ -159,12 +178,12 @@ return null;
 }
 break;
 }
-});})(ctx,width,height,img,pixels,canvas))
+});})(ctx,width,height,img,pixels,id,d,canvas))
 ,null,null));
-});})(ctx,width,height,img,pixels,canvas))
+});})(ctx,width,height,img,pixels,id,d,canvas))
 ;
 return iter__7227__auto__(cljs.core.range.cljs$core$IFn$_invoke$arity$1(width));
-})()));
+})(),(2000));
 } else {
 return null;
 }
